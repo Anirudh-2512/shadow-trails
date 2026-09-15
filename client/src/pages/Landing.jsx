@@ -1,8 +1,10 @@
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import CityScene from '../components/3d/CityScene.jsx';
 import LaunchSequence from '../components/storytelling/LaunchSequence.jsx';
 import StoryGraphic from '../components/storytelling/StoryGraphic.jsx';
+import TrackBackdrop from '../components/storytelling/TrackBackdrop.jsx';
 
 const BEATS = [
   {
@@ -27,14 +29,24 @@ const BEATS = [
 ];
 
 function Beat({ beat, index }) {
+  const heroRef = useRef(null);
+  const { scrollYProgress: scrollProgress } = useScroll({ target: heroRef, offset: ['start end', 'end start'] });
+
   return (
     <motion.section
+      ref={heroRef}
       initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-30%' }}
       transition={{ duration: 0.9, ease: 'easeOut' }}
       className={`flex min-h-[70vh] items-center px-6 ${index % 2 ? 'justify-start' : 'justify-end'}`}
     >
+      <motion.div
+        className="absolute inset-0"
+        style={{ opacity: useTransform(scrollProgress, [0, 0.2, 0.9, 1], [0.25, 0.9, 0.9, 0.25]) }}
+      >
+        <TrackBackdrop />
+      </motion.div>
       <motion.div
         whileHover={{ scale: 1.02 }}
         className="flex max-w-3xl flex-col gap-4 rounded-2xl border border-white/10 bg-smoke/70 p-6 backdrop-blur-md sm:flex-row sm:items-center sm:p-8"

@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import TrackBackdrop from './TrackBackdrop.jsx';
 
 const SECTORS = [
   { at: 0.06, label: 'FORMATION LAP', text: 'CITY NETWORK TRACKED. SIGNALS SWEEPS ACTIVE.' },
@@ -38,7 +39,7 @@ export default function LaunchSequence() {
   return (
     <section ref={ref} className="relative h-[340vh]">
       <div className="sticky top-0 h-screen overflow-hidden">
-        <div className="absolute inset-0 bg-void" />
+        <TrackBackdrop />
         {/* racing stripes */}
         <div
           className="absolute inset-0 opacity-[0.10]"
