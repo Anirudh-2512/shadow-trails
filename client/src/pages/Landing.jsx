@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import CityScene from '../components/3d/CityScene.jsx';
+import LaunchSequence from '../components/storytelling/LaunchSequence.jsx';
 
 const BEATS = [
   {
@@ -113,8 +114,14 @@ export default function Landing() {
           </div>
         </motion.section>
 
-        {BEATS.map((beat, i) => (
+        {BEATS.slice(0, 1).map((beat, i) => (
           <Beat key={beat.id} beat={beat} index={i} />
+        ))}
+
+        <LaunchSequence />
+
+        {BEATS.slice(1).map((beat, i) => (
+          <Beat key={beat.id} beat={beat} index={i + 1} />
         ))}
 
         <footer className="py-12 text-center text-xs uppercase tracking-widest text-white/20">
