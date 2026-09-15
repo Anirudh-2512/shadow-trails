@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme {
+  --color-void: #050507;
+  --color-asphalt: #0c0c11;
+  --color-smoke: #16161d;
+  --color-neon-purple: #a855f7;
+  --color-neon-cyan: #22d3ee;
+  --color-neon-orange: #fb923c;
+  --font-display: "Oswald", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+body {
+  background-color: var(--color-void);
+  color: #e5e7eb;
+  font-family: var(--font-body);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+/* mobile map chrome */
+@media (max-width: 640px) {
+  .maplibregl-ctrl-attrib {
+    display: none;
+  }
+  .maplibregl-ctrl-top-right .maplibregl-ctrl-group {
+    box-shadow: none;
+  }
+}
+
+input,
+textarea,
+button {
+  font-size: 16px; /* prevents iOS auto-zoom on focus */
+}
+
+.safe-b {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+::selection {
+  background: var(--color-neon-purple);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-void);
+}
+::-webkit-scrollbar-thumb {
+  background: #26262f;
+  border-radius: 4px;
+}
