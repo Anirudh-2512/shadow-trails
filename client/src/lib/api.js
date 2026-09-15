@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+// same-origin in production (single deployment), live server locally
+const BASE = import.meta.env.PROD ? '' : import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000',
+  baseURL: BASE,
 });
 
 api.interceptors.request.use((config) => {
