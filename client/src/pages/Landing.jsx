@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import CityScene from '../components/3d/CityScene.jsx';
 import LaunchSequence from '../components/storytelling/LaunchSequence.jsx';
+import StoryGraphic from '../components/storytelling/StoryGraphic.jsx';
 
 const BEATS = [
   {
@@ -32,20 +33,27 @@ function Beat({ beat, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-30%' }}
       transition={{ duration: 0.9, ease: 'easeOut' }}
-      className={`flex min-h-[70vh] items-center px-6 ${index % 2 ? 'justify-end' : 'justify-start'}`}
+      className={`flex min-h-[70vh] items-center px-6 ${index % 2 ? 'justify-start' : 'justify-end'}`}
     >
       <motion.div
         whileHover={{ scale: 1.02 }}
-        className="max-w-xl rounded-2xl border border-white/10 bg-smoke/70 p-8 backdrop-blur-md sm:p-10"
+        className="flex max-w-3xl flex-col gap-4 rounded-2xl border border-white/10 bg-smoke/70 p-6 backdrop-blur-md sm:flex-row sm:items-center sm:p-8"
       >
-        {beat.title ? (
-          <h2 className="font-display text-3xl uppercase tracking-wide text-white sm:text-4xl">
-            <span className="bg-gradient-to-r from-neon-purple to-neon-cyan bg-clip-text text-transparent">
-              {beat.title}
-            </span>
-          </h2>
-        ) : null}
-        <p className="mt-4 text-lg leading-relaxed text-white/60">{beat.text}</p>
+        <div className={`flex-1 ${index % 2 ? 'sm:order-2' : 'sm:order-1'}`}>
+          {beat.title ? (
+            <h2 className="font-display text-3xl uppercase tracking-wide text-white sm:text-4xl">
+              <span className="bg-gradient-to-r from-neon-purple to-neon-cyan bg-clip-text text-transparent">
+                {beat.title}
+              </span>
+            </h2>
+          ) : null}
+          <p className={beat.title ? 'mt-4 text-lg leading-relaxed text-white/60' : 'text-lg leading-relaxed text-white/60'}>
+            {beat.text}
+          </p>
+        </div>
+        <div className={`flex items-center justify-center rounded-xl p-2 ${index % 2 ? 'sm:order-1' : 'sm:order-2'}`}>
+          <StoryGraphic id={beat.id} />
+        </div>
       </motion.div>
     </motion.section>
   );
